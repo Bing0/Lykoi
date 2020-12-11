@@ -1,3 +1,18 @@
-PODFILE CHECKSUM: af8bbb0ce09d9b922cf1be069e64d6d46dc27e2a
+PODS:
+  - CocoaLumberjack/Core (3.7.0)
+  - CocoaLumberjack/Swift (3.7.0):
+    - CocoaLumberjack/Core
+
+DEPENDENCIES:
+  - CocoaLumberjack/Swift
+
+SPEC REPOS:
+  trunk:
+    - CocoaLumberjack
+
+SPEC CHECKSUMS:
+  CocoaLumberjack: e8955b9d337ac307103b0a34fd141c32f27e53c5
+
+PODFILE CHECKSUM: e4ea87efc043094a62cba6b76353c1317c1c96de
 
 COCOAPODS: 1.10.0

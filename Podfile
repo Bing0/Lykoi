@@ -6,5 +6,6 @@ target 'Lykoi' do
   use_frameworks!
 
   # Pods for Lykoi
+  pod 'CocoaLumberjack/Swift'
 
 end

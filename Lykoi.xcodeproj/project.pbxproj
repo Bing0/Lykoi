@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		54096F0DA790CCA933478329 /* Pods_Lykoi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C783A304EC055A4066BB73BC /* Pods_Lykoi.framework */; };
 		CBDFC4F3482BF77FCACB035A /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBDFC54CB21B39898B1FFA61 /* Persistence.swift */; };
+		CBDFC6965954D1CF2391FE33 /* PDFDocViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBDFC8AA9112DAEC0BFF69CC /* PDFDocViewModel.swift */; };
 		E962846B2583AE5D0012FFE3 /* LykoiApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E962846A2583AE5D0012FFE3 /* LykoiApp.swift */; };
 		E962846D2583AE5D0012FFE3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E962846C2583AE5D0012FFE3 /* ContentView.swift */; };
 		E962846F2583AE5F0012FFE3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E962846E2583AE5F0012FFE3 /* Assets.xcassets */; };
@@ -21,6 +22,7 @@
 		C783A304EC055A4066BB73BC /* Pods_Lykoi.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Lykoi.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CBDFC54CB21B39898B1FFA61 /* Persistence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		CBDFC73BFAB1C46D71C784B6 /* Lykoi.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = Lykoi.entitlements; sourceTree = "<group>"; };
+		CBDFC8AA9112DAEC0BFF69CC /* PDFDocViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PDFDocViewModel.swift; sourceTree = "<group>"; };
 		E96284672583AE5D0012FFE3 /* Lykoi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lykoi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E962846A2583AE5D0012FFE3 /* LykoiApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LykoiApp.swift; sourceTree = "<group>"; };
 		E962846C2583AE5D0012FFE3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -61,6 +63,14 @@
 			path = CoreData;
 			sourceTree = "<group>";
 		};
+		CBDFC3139A3B05BFAD988666 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				CBDFC8AA9112DAEC0BFF69CC /* PDFDocViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		DDBB448F48B1AD9FB64EA49A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -97,6 +107,7 @@
 				CBDFC73BFAB1C46D71C784B6 /* Lykoi.entitlements */,
 				E96284702583AE5F0012FFE3 /* Preview Content */,
 				CBDFC0F80B6EC6998C3247BF /* CoreData */,
+				CBDFC3139A3B05BFAD988666 /* ViewModel */,
 			);
 			path = Lykoi;
 			sourceTree = "<group>";
@@ -120,6 +131,7 @@
 				E96284632583AE5D0012FFE3 /* Sources */,
 				E96284642583AE5D0012FFE3 /* Frameworks */,
 				E96284652583AE5D0012FFE3 /* Resources */,
+				4687D22EBBD2FD6048D461D3 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -175,6 +187,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		4687D22EBBD2FD6048D461D3 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Lykoi/Pods-Lykoi-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Lykoi/Pods-Lykoi-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Lykoi/Pods-Lykoi-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		CB0D3C4CB886F7546F82C0ED /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -208,6 +237,7 @@
 				E96284772583AE5F0012FFE3 /* Lykoi.xcdatamodeld in Sources */,
 				E962846B2583AE5D0012FFE3 /* LykoiApp.swift in Sources */,
 				CBDFC4F3482BF77FCACB035A /* Persistence.swift in Sources */,
+				CBDFC6965954D1CF2391FE33 /* PDFDocViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
