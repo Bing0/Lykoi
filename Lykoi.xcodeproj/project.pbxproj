@@ -8,24 +8,24 @@
 
 /* Begin PBXBuildFile section */
 		54096F0DA790CCA933478329 /* Pods_Lykoi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C783A304EC055A4066BB73BC /* Pods_Lykoi.framework */; };
+		CBDFC4F3482BF77FCACB035A /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBDFC54CB21B39898B1FFA61 /* Persistence.swift */; };
 		E962846B2583AE5D0012FFE3 /* LykoiApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E962846A2583AE5D0012FFE3 /* LykoiApp.swift */; };
 		E962846D2583AE5D0012FFE3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E962846C2583AE5D0012FFE3 /* ContentView.swift */; };
 		E962846F2583AE5F0012FFE3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E962846E2583AE5F0012FFE3 /* Assets.xcassets */; };
 		E96284722583AE5F0012FFE3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E96284712583AE5F0012FFE3 /* Preview Assets.xcassets */; };
-		E96284742583AE5F0012FFE3 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = E96284732583AE5F0012FFE3 /* Persistence.swift */; };
 		E96284772583AE5F0012FFE3 /* Lykoi.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E96284752583AE5F0012FFE3 /* Lykoi.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		3C0874C8B2D6E67EB114AC77 /* Pods-Lykoi.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lykoi.release.xcconfig"; path = "Target Support Files/Pods-Lykoi/Pods-Lykoi.release.xcconfig"; sourceTree = "<group>"; };
 		C783A304EC055A4066BB73BC /* Pods_Lykoi.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Lykoi.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		E9612CA02583B8BA0059980E /* Lykoi.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Lykoi.entitlements; sourceTree = "<group>"; };
+		CBDFC54CB21B39898B1FFA61 /* Persistence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
+		CBDFC73BFAB1C46D71C784B6 /* Lykoi.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = Lykoi.entitlements; sourceTree = "<group>"; };
 		E96284672583AE5D0012FFE3 /* Lykoi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lykoi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E962846A2583AE5D0012FFE3 /* LykoiApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LykoiApp.swift; sourceTree = "<group>"; };
 		E962846C2583AE5D0012FFE3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		E962846E2583AE5F0012FFE3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E96284712583AE5F0012FFE3 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		E96284732583AE5F0012FFE3 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		E96284762583AE5F0012FFE3 /* Lykoi.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Lykoi.xcdatamodel; sourceTree = "<group>"; };
 		E96284782583AE5F0012FFE3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FC71EAD9A458962266DB32AD /* Pods-Lykoi.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lykoi.debug.xcconfig"; path = "Target Support Files/Pods-Lykoi/Pods-Lykoi.debug.xcconfig"; sourceTree = "<group>"; };
@@ -50,6 +50,15 @@
 				3C0874C8B2D6E67EB114AC77 /* Pods-Lykoi.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		CBDFC0F80B6EC6998C3247BF /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				E96284752583AE5F0012FFE3 /* Lykoi.xcdatamodeld */,
+				CBDFC54CB21B39898B1FFA61 /* Persistence.swift */,
+			);
+			path = CoreData;
 			sourceTree = "<group>";
 		};
 		DDBB448F48B1AD9FB64EA49A /* Frameworks */ = {
@@ -81,14 +90,13 @@
 		E96284692583AE5D0012FFE3 /* Lykoi */ = {
 			isa = PBXGroup;
 			children = (
-				E9612CA02583B8BA0059980E /* Lykoi.entitlements */,
 				E962846A2583AE5D0012FFE3 /* LykoiApp.swift */,
 				E962846C2583AE5D0012FFE3 /* ContentView.swift */,
 				E962846E2583AE5F0012FFE3 /* Assets.xcassets */,
-				E96284732583AE5F0012FFE3 /* Persistence.swift */,
 				E96284782583AE5F0012FFE3 /* Info.plist */,
-				E96284752583AE5F0012FFE3 /* Lykoi.xcdatamodeld */,
+				CBDFC73BFAB1C46D71C784B6 /* Lykoi.entitlements */,
 				E96284702583AE5F0012FFE3 /* Preview Content */,
+				CBDFC0F80B6EC6998C3247BF /* CoreData */,
 			);
 			path = Lykoi;
 			sourceTree = "<group>";
@@ -196,10 +204,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E96284742583AE5F0012FFE3 /* Persistence.swift in Sources */,
 				E962846D2583AE5D0012FFE3 /* ContentView.swift in Sources */,
 				E96284772583AE5F0012FFE3 /* Lykoi.xcdatamodeld in Sources */,
 				E962846B2583AE5D0012FFE3 /* LykoiApp.swift in Sources */,
+				CBDFC4F3482BF77FCACB035A /* Persistence.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
