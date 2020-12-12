@@ -3,13 +3,15 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		54096F0DA790CCA933478329 /* Pods_Lykoi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C783A304EC055A4066BB73BC /* Pods_Lykoi.framework */; };
 		CBDFC4F3482BF77FCACB035A /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBDFC54CB21B39898B1FFA61 /* Persistence.swift */; };
 		CBDFC6965954D1CF2391FE33 /* PDFDocViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBDFC8AA9112DAEC0BFF69CC /* PDFDocViewModel.swift */; };
+		E95F54DB2584568500510006 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = E95F54DA2584568500510006 /* libc++.tbd */; };
+		E95F55012584D4BD00510006 /* libpdfium.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E95F55002584D4BD00510006 /* libpdfium.a */; platformFilter = ios; };
 		E962846B2583AE5D0012FFE3 /* LykoiApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E962846A2583AE5D0012FFE3 /* LykoiApp.swift */; };
 		E962846D2583AE5D0012FFE3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E962846C2583AE5D0012FFE3 /* ContentView.swift */; };
 		E962846F2583AE5F0012FFE3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E962846E2583AE5F0012FFE3 /* Assets.xcassets */; };
@@ -23,6 +25,31 @@
 		CBDFC54CB21B39898B1FFA61 /* Persistence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		CBDFC73BFAB1C46D71C784B6 /* Lykoi.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = Lykoi.entitlements; sourceTree = "<group>"; };
 		CBDFC8AA9112DAEC0BFF69CC /* PDFDocViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PDFDocViewModel.swift; sourceTree = "<group>"; };
+		E95F54DA2584568500510006 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.0.sdk/usr/lib/libc++.tbd"; sourceTree = DEVELOPER_DIR; };
+		E95F54DD2584574B00510006 /* Lykoi-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Lykoi-Bridging-Header.h"; sourceTree = "<group>"; };
+		E95F54E32584579500510006 /* fpdfview.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fpdfview.h; sourceTree = "<group>"; };
+		E95F54E42584579500510006 /* fpdf_structtree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fpdf_structtree.h; sourceTree = "<group>"; };
+		E95F54E52584579500510006 /* fpdf_text.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fpdf_text.h; sourceTree = "<group>"; };
+		E95F54E62584579500510006 /* fpdf_flatten.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fpdf_flatten.h; sourceTree = "<group>"; };
+		E95F54E72584579500510006 /* fpdf_annot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fpdf_annot.h; sourceTree = "<group>"; };
+		E95F54E82584579500510006 /* fpdf_signature.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fpdf_signature.h; sourceTree = "<group>"; };
+		E95F54E92584579500510006 /* fpdf_formfill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fpdf_formfill.h; sourceTree = "<group>"; };
+		E95F54EA2584579500510006 /* fpdf_dataavail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fpdf_dataavail.h; sourceTree = "<group>"; };
+		E95F54EB2584579500510006 /* fpdf_edit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fpdf_edit.h; sourceTree = "<group>"; };
+		E95F54EC2584579500510006 /* fpdf_sysfontinfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fpdf_sysfontinfo.h; sourceTree = "<group>"; };
+		E95F54ED2584579500510006 /* fpdf_thumbnail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fpdf_thumbnail.h; sourceTree = "<group>"; };
+		E95F54EE2584579500510006 /* fpdf_ext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fpdf_ext.h; sourceTree = "<group>"; };
+		E95F54EF2584579500510006 /* fpdf_catalog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fpdf_catalog.h; sourceTree = "<group>"; };
+		E95F54F02584579500510006 /* fpdf_searchex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fpdf_searchex.h; sourceTree = "<group>"; };
+		E95F54F12584579500510006 /* fpdf_javascript.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fpdf_javascript.h; sourceTree = "<group>"; };
+		E95F54F22584579500510006 /* fpdf_ppo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fpdf_ppo.h; sourceTree = "<group>"; };
+		E95F54F32584579500510006 /* fpdf_attachment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fpdf_attachment.h; sourceTree = "<group>"; };
+		E95F54F42584579500510006 /* fpdf_fwlevent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fpdf_fwlevent.h; sourceTree = "<group>"; };
+		E95F54F52584579500510006 /* fpdf_doc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fpdf_doc.h; sourceTree = "<group>"; };
+		E95F54F62584579500510006 /* fpdf_transformpage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fpdf_transformpage.h; sourceTree = "<group>"; };
+		E95F54F72584579500510006 /* fpdf_progressive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fpdf_progressive.h; sourceTree = "<group>"; };
+		E95F54F82584579500510006 /* fpdf_save.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fpdf_save.h; sourceTree = "<group>"; };
+		E95F55002584D4BD00510006 /* libpdfium.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libpdfium.a; path = Lykoi/PDFium/libpdfium.a; sourceTree = "<group>"; };
 		E96284672583AE5D0012FFE3 /* Lykoi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lykoi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E962846A2583AE5D0012FFE3 /* LykoiApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LykoiApp.swift; sourceTree = "<group>"; };
 		E962846C2583AE5D0012FFE3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -38,6 +65,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E95F55012584D4BD00510006 /* libpdfium.a in Frameworks */,
+				E95F54DB2584568500510006 /* libc++.tbd in Frameworks */,
 				54096F0DA790CCA933478329 /* Pods_Lykoi.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -74,9 +103,40 @@
 		DDBB448F48B1AD9FB64EA49A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E95F55002584D4BD00510006 /* libpdfium.a */,
+				E95F54DA2584568500510006 /* libc++.tbd */,
 				C783A304EC055A4066BB73BC /* Pods_Lykoi.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E95F54D5258455F900510006 /* PDFium */ = {
+			isa = PBXGroup;
+			children = (
+				E95F54E72584579500510006 /* fpdf_annot.h */,
+				E95F54F32584579500510006 /* fpdf_attachment.h */,
+				E95F54EF2584579500510006 /* fpdf_catalog.h */,
+				E95F54EA2584579500510006 /* fpdf_dataavail.h */,
+				E95F54F52584579500510006 /* fpdf_doc.h */,
+				E95F54EB2584579500510006 /* fpdf_edit.h */,
+				E95F54EE2584579500510006 /* fpdf_ext.h */,
+				E95F54E62584579500510006 /* fpdf_flatten.h */,
+				E95F54E92584579500510006 /* fpdf_formfill.h */,
+				E95F54F42584579500510006 /* fpdf_fwlevent.h */,
+				E95F54F12584579500510006 /* fpdf_javascript.h */,
+				E95F54F22584579500510006 /* fpdf_ppo.h */,
+				E95F54F72584579500510006 /* fpdf_progressive.h */,
+				E95F54F82584579500510006 /* fpdf_save.h */,
+				E95F54F02584579500510006 /* fpdf_searchex.h */,
+				E95F54E82584579500510006 /* fpdf_signature.h */,
+				E95F54E42584579500510006 /* fpdf_structtree.h */,
+				E95F54EC2584579500510006 /* fpdf_sysfontinfo.h */,
+				E95F54E52584579500510006 /* fpdf_text.h */,
+				E95F54ED2584579500510006 /* fpdf_thumbnail.h */,
+				E95F54F62584579500510006 /* fpdf_transformpage.h */,
+				E95F54E32584579500510006 /* fpdfview.h */,
+			);
+			path = PDFium;
 			sourceTree = "<group>";
 		};
 		E962845E2583AE5D0012FFE3 = {
@@ -100,8 +160,10 @@
 		E96284692583AE5D0012FFE3 /* Lykoi */ = {
 			isa = PBXGroup;
 			children = (
+				E95F54D5258455F900510006 /* PDFium */,
 				E962846A2583AE5D0012FFE3 /* LykoiApp.swift */,
 				E962846C2583AE5D0012FFE3 /* ContentView.swift */,
+				E95F54DD2584574B00510006 /* Lykoi-Bridging-Header.h */,
 				E962846E2583AE5F0012FFE3 /* Assets.xcassets */,
 				E96284782583AE5F0012FFE3 /* Info.plist */,
 				CBDFC73BFAB1C46D71C784B6 /* Lykoi.entitlements */,
@@ -153,6 +215,7 @@
 				TargetAttributes = {
 					E96284662583AE5D0012FFE3 = {
 						CreatedOnToolsVersion = 12.2;
+						LastSwiftMigration = 1220;
 					};
 				};
 			};
@@ -366,6 +429,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Lykoi/Lykoi.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Lykoi/Preview Content\"";
@@ -378,9 +442,15 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Lykoi/PDFium",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.yleaks.Lykoi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "Lykoi/Lykoi-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -392,6 +462,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Lykoi/Lykoi.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Lykoi/Preview Content\"";
@@ -404,9 +475,14 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Lykoi/PDFium",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.yleaks.Lykoi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "Lykoi/Lykoi-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
