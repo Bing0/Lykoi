@@ -1,9 +1,34 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="false" userDefinedModelVersionIdentifier="">
-    <entity name="Item" representedClassName="Item" syncable="YES" codeGenerationType="class">
-        <attribute name="timestamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17511" systemVersion="20B29" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="AnnotationInDoc" representedClassName="AnnotationInDoc" syncable="YES" codeGenerationType="class">
+        <attribute name="isiCloud" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="relativePath" optional="YES" attributeType="String"/>
+        <relationship name="drawings" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Drawing" inverseName="doc" inverseEntity="Drawing"/>
+        <relationship name="highlights" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Highlight" inverseName="doc" inverseEntity="Highlight"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="relativePath"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+    <entity name="Drawing" representedClassName="Drawing" syncable="YES" codeGenerationType="class">
+        <attribute name="createTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="pageNumber" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="points" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES"/>
+        <relationship name="doc" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="AnnotationInDoc" inverseName="drawings" inverseEntity="AnnotationInDoc"/>
+    </entity>
+    <entity name="Highlight" representedClassName="Highlight" syncable="YES" codeGenerationType="class">
+        <attribute name="createTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="height" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="page" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="width" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="x" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="y" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <relationship name="doc" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="AnnotationInDoc" inverseName="highlights" inverseEntity="AnnotationInDoc"/>
     </entity>
     <elements>
-        <element name="Item" positionX="-63" positionY="-18" width="128" height="44"/>
+        <element name="AnnotationInDoc" positionX="-532.6430053710938" positionY="61.13589477539062" width="128" height="89"/>
+        <element name="Drawing" positionX="-154.3328857421875" positionY="-7.355682373046875" width="128" height="89"/>
+        <element name="Highlight" positionX="-151.6781005859375" positionY="106.4093322753906" width="128" height="148"/>
     </elements>
 </model>

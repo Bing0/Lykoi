@@ -3,3 +3,6 @@
 //
 
 #include "fpdfview.h"
+#import "fpdf_text.h"
+#import "fpdf_edit.h"
+#import "fpdf_doc.h"
