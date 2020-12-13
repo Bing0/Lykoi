@@ -59,7 +59,7 @@ class PDFDoc: NSObject {
         guard let cgPDFPage = cgPDF.page(at: index + 1) else {
             return nil
         }
-        guard let fpPDFPage = FPDF_LoadPage(self.fpPDF, Int32(index)) else {
+        guard let fpPDFPage = FPDF_LoadPage(fpPDF, Int32(index)) else {
             return nil
         }
 

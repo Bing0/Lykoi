@@ -16,8 +16,11 @@ class PDFDocViewModel: ObservableObject {
         directoryContent = DirectoryContent()
         monitorURLOf(directoryContent.currentURL)
 
-        var config = FPDF_LIBRARY_CONFIG(version: 2, m_pUserFontPaths: nil, m_pIsolate: nil, m_v8EmbedderSlot: 0, m_pPlatform: nil)
+        var config = FPDF_LIBRARY_CONFIG(version: 3, m_pUserFontPaths: nil, m_pIsolate: nil, m_v8EmbedderSlot: 0, m_pPlatform: nil)
         FPDF_InitLibraryWithConfig(&config)
+    }
+    
+    deinit {
         FPDF_DestroyLibrary()
     }
 

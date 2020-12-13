@@ -26,7 +26,7 @@ struct DocumentListView: View {
                     }
                 } else {
                     HStack {
-                        NavigationLink(destination: PDFDocViewerView(url: contentURL)) {
+                        NavigationLink(destination: PDFDocHostView(url: contentURL)) {
                             DocumentListItemView(isDirectory: isDirectory, fileName: fileName)
                         }.buttonStyle(PlainButtonStyle())
                         Image(systemName: "slider.vertical.3")

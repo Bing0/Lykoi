@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct PDFDocViewerView: View {
+struct PDFDocHostView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @Environment(\.managedObjectContext) private var viewContext
     private var docRequest: FetchRequest<AnnotationInDoc>
@@ -56,7 +56,7 @@ struct PDFDocViewerView: View {
             TopBarView(title: url.lastPathComponent)
             EditorBarView(editingMode: $editingMode)
                     .offset(x: xOffset, y: 0)
-            PDFDocView(url: url, annotationInDoc: annotationInDoc.count == 0 ? nil : annotationInDoc[0])
+            PDFDocViewController(url: url, annotationInDoc: annotationInDoc.count == 0 ? nil : annotationInDoc[0])
                     .offset(x: xOffset, y: 0)
         }
                 .navigationBarTitle("")
@@ -80,8 +80,8 @@ struct PDFDocViewerView: View {
 struct PDFDocViewerView_Previews: PreviewProvider {
     static var previews: some View {
         let documentURL = Bundle.main.url(forResource: "sample", withExtension: "pdf")!
-        PDFDocViewerView(url: documentURL)
-        PDFDocViewerView(url: documentURL)
+        PDFDocHostView(url: documentURL)
+        PDFDocHostView(url: documentURL)
                 .environment(\.colorScheme, .dark)
     }
 }

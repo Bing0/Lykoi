@@ -11,7 +11,9 @@
 		CBDFC0BE92F1563F3ADB0B82 /* PDFDoc.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBDFC9EBDF4F157515EB92B0 /* PDFDoc.swift */; };
 		CBDFC27584ABFD61676F61B6 /* PDFPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBDFCEF205C10150AD452C39 /* PDFPage.swift */; };
 		CBDFC4F3482BF77FCACB035A /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBDFC54CB21B39898B1FFA61 /* Persistence.swift */; };
+		CBDFC55694996D68DD88E246 /* PDFDocViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBDFC99147B065950931871D /* PDFDocViewController.swift */; };
 		CBDFC6965954D1CF2391FE33 /* PDFDocViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBDFC8AA9112DAEC0BFF69CC /* PDFDocViewModel.swift */; };
+		CBDFC767AA8235BB009F843B /* PDFPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBDFC87AA2B07D1BC8FBC262 /* PDFPageView.swift */; };
 		CBDFC81579F871D18C7362AC /* MagnifyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBDFC938E1DE20BA13CBCABF /* MagnifyView.swift */; };
 		E95F54DB2584568500510006 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = E95F54DA2584568500510006 /* libc++.tbd */; };
 		E95F55012584D4BD00510006 /* libpdfium.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E95F55002584D4BD00510006 /* libpdfium.a */; platformFilter = ios; };
@@ -25,8 +27,7 @@
 		E99D30372584F54100944B40 /* HomePageActionBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99D30312584F54100944B40 /* HomePageActionBar.swift */; };
 		E99D30382584F54100944B40 /* HomePageTopBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99D30322584F54100944B40 /* HomePageTopBarView.swift */; };
 		E99D30392584F54100944B40 /* LyDividerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99D30332584F54100944B40 /* LyDividerView.swift */; };
-		E99D303F2584F54A00944B40 /* PDFDocView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99D303B2584F54A00944B40 /* PDFDocView.swift */; };
-		E99D30402584F54A00944B40 /* PDFDocViewerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99D303C2584F54A00944B40 /* PDFDocViewerView.swift */; };
+		E99D30402584F54A00944B40 /* PDFDocHostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99D303C2584F54A00944B40 /* PDFDocHostView.swift */; };
 		E99D30412584F54A00944B40 /* EditorBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99D303D2584F54A00944B40 /* EditorBarView.swift */; };
 		E99D30422584F54A00944B40 /* TopBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99D303E2584F54A00944B40 /* TopBarView.swift */; };
 		E99D30462584F62A00944B40 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99D30452584F62A00944B40 /* Models.swift */; };
@@ -37,8 +38,10 @@
 		C783A304EC055A4066BB73BC /* Pods_Lykoi.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Lykoi.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CBDFC54CB21B39898B1FFA61 /* Persistence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		CBDFC73BFAB1C46D71C784B6 /* Lykoi.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = Lykoi.entitlements; sourceTree = "<group>"; };
+		CBDFC87AA2B07D1BC8FBC262 /* PDFPageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PDFPageView.swift; sourceTree = "<group>"; };
 		CBDFC8AA9112DAEC0BFF69CC /* PDFDocViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PDFDocViewModel.swift; sourceTree = "<group>"; };
 		CBDFC938E1DE20BA13CBCABF /* MagnifyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MagnifyView.swift; sourceTree = "<group>"; };
+		CBDFC99147B065950931871D /* PDFDocViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PDFDocViewController.swift; sourceTree = "<group>"; };
 		CBDFC9EBDF4F157515EB92B0 /* PDFDoc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PDFDoc.swift; sourceTree = "<group>"; };
 		CBDFCEF205C10150AD452C39 /* PDFPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PDFPage.swift; sourceTree = "<group>"; };
 		E95F54DA2584568500510006 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.0.sdk/usr/lib/libc++.tbd"; sourceTree = DEVELOPER_DIR; };
@@ -78,8 +81,7 @@
 		E99D30312584F54100944B40 /* HomePageActionBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomePageActionBar.swift; sourceTree = "<group>"; };
 		E99D30322584F54100944B40 /* HomePageTopBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomePageTopBarView.swift; sourceTree = "<group>"; };
 		E99D30332584F54100944B40 /* LyDividerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LyDividerView.swift; sourceTree = "<group>"; };
-		E99D303B2584F54A00944B40 /* PDFDocView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PDFDocView.swift; sourceTree = "<group>"; };
-		E99D303C2584F54A00944B40 /* PDFDocViewerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PDFDocViewerView.swift; sourceTree = "<group>"; };
+		E99D303C2584F54A00944B40 /* PDFDocHostView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PDFDocHostView.swift; sourceTree = "<group>"; };
 		E99D303D2584F54A00944B40 /* EditorBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditorBarView.swift; sourceTree = "<group>"; };
 		E99D303E2584F54A00944B40 /* TopBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopBarView.swift; sourceTree = "<group>"; };
 		E99D30452584F62A00944B40 /* Models.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
@@ -229,10 +231,11 @@
 			isa = PBXGroup;
 			children = (
 				E99D303D2584F54A00944B40 /* EditorBarView.swift */,
-				E99D303C2584F54A00944B40 /* PDFDocViewerView.swift */,
-				E99D303B2584F54A00944B40 /* PDFDocView.swift */,
+				E99D303C2584F54A00944B40 /* PDFDocHostView.swift */,
 				E99D303E2584F54A00944B40 /* TopBarView.swift */,
 				CBDFC938E1DE20BA13CBCABF /* MagnifyView.swift */,
+				CBDFC99147B065950931871D /* PDFDocViewController.swift */,
+				CBDFC87AA2B07D1BC8FBC262 /* PDFPageView.swift */,
 			);
 			path = PDFView;
 			sourceTree = "<group>";
@@ -362,7 +365,6 @@
 				E96284772583AE5F0012FFE3 /* Lykoi.xcdatamodeld in Sources */,
 				E99D30412584F54A00944B40 /* EditorBarView.swift in Sources */,
 				E99D30392584F54100944B40 /* LyDividerView.swift in Sources */,
-				E99D303F2584F54A00944B40 /* PDFDocView.swift in Sources */,
 				E99D30422584F54A00944B40 /* TopBarView.swift in Sources */,
 				E962846B2583AE5D0012FFE3 /* LykoiApp.swift in Sources */,
 				E99D30362584F54100944B40 /* ContentView.swift in Sources */,
@@ -370,13 +372,15 @@
 				E99D30382584F54100944B40 /* HomePageTopBarView.swift in Sources */,
 				E99D30462584F62A00944B40 /* Models.swift in Sources */,
 				CBDFC4F3482BF77FCACB035A /* Persistence.swift in Sources */,
-				E99D30402584F54A00944B40 /* PDFDocViewerView.swift in Sources */,
+				E99D30402584F54A00944B40 /* PDFDocHostView.swift in Sources */,
 				CBDFC6965954D1CF2391FE33 /* PDFDocViewModel.swift in Sources */,
 				E99D30352584F54100944B40 /* DocumentListItemView.swift in Sources */,
 				E99D30342584F54100944B40 /* DocumentListView.swift in Sources */,
 				CBDFC0BE92F1563F3ADB0B82 /* PDFDoc.swift in Sources */,
 				CBDFC27584ABFD61676F61B6 /* PDFPage.swift in Sources */,
 				CBDFC81579F871D18C7362AC /* MagnifyView.swift in Sources */,
+				CBDFC55694996D68DD88E246 /* PDFDocViewController.swift in Sources */,
+				CBDFC767AA8235BB009F843B /* PDFPageView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
