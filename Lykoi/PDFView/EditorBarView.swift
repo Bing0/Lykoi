@@ -25,9 +25,9 @@ struct EditorBarView: View {
                         editingMode = .draw
                     }
             Image(systemName: "highlighter")
-                    .background(editingMode == .hightlight ? Color.gray : Color.clear)
+                    .background(editingMode == .highlight ? Color.gray : Color.clear)
                     .onTapGesture {
-                        editingMode = .hightlight
+                        editingMode = .highlight
                     }
             Spacer()
         }

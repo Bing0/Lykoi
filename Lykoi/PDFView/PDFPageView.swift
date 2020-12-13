@@ -33,9 +33,9 @@ class PDFPageView: UICollectionViewCell {
         super.init(coder: coder)
     }
 
-//    override class var layerClass: AnyClass {
-//        PDFTiledLayer.self
-//    }
+    override class var layerClass: AnyClass {
+        PDFTiledLayer.self
+    }
 
     func set(page: PDFPage?) {
         pdfPage = page

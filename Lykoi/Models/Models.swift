@@ -64,7 +64,7 @@ fileprivate func urlOfContents(in documentsURL: URL, skipsHiddenFiles: Bool = tr
 extension URL {
     func relativeToHome() -> String {
         let homeAbsolutePath = getDocumentsDirectory().resolvingSymlinksInPath().absoluteString
-        let absoluteString = self.resolvingSymlinksInPath().absoluteString
+        let absoluteString = resolvingSymlinksInPath().absoluteString
         guard absoluteString.hasPrefix(homeAbsolutePath) else {
             return self.absoluteString
         }
@@ -78,6 +78,7 @@ extension URL {
 
 enum EditingMode {
     case hand
-    case hightlight
+    case highlight
     case draw
 }
+

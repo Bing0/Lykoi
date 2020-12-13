@@ -56,7 +56,7 @@ struct PDFDocHostView: View {
             TopBarView(title: url.lastPathComponent)
             EditorBarView(editingMode: $editingMode)
                     .offset(x: xOffset, y: 0)
-            PDFDocViewController(url: url, annotationInDoc: annotationInDoc.count == 0 ? nil : annotationInDoc[0])
+            PDFDocViewController(url: url, annotationInDoc: annotationInDoc.count == 0 ? nil : annotationInDoc[0], editingMode: $editingMode)
                     .offset(x: xOffset, y: 0)
         }
                 .navigationBarTitle("")
