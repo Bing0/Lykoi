@@ -8,8 +8,16 @@ import UIKit
 
 class DocViewController: UIViewController {
     private var pdfDoc: PDFDoc?
+    private var scale: CGFloat = 1.0
+    private var scaleStart: CGFloat = 1.0
+    private var zoomCenterInRealContent: CGPoint = .zero
+    private var zoomCenterXToMidRealContent: CGFloat = 0
+    private var testPoint = UIView(frame: .init())
+    private let miniScale: CGFloat = 0.25
+    private let maxScale: CGFloat = 8
+    private var magnifierView: MagnifyView? = nil
 
-    lazy var collectionView: UICollectionView = {
+    lazy var pdfDocView: UICollectionView = {
         let layout = UICollectionViewScaleLayout()
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         return cv
@@ -18,6 +26,12 @@ class DocViewController: UIViewController {
     init(url: URL) {
         super.init(nibName: nil, bundle: nil)
         pdfDoc = PDFDoc(withURL: url)
+
+        testPoint.backgroundColor = .red
+        testPoint.frame.size = CGSize(width: 3, height: 3)
+        pdfDocView.addSubview(testPoint)
+        let zoomGesture = UIPinchGestureRecognizer(target: self, action: #selector(DocViewController.zoomPdfView(_:)))
+        view.addGestureRecognizer(zoomGesture)
     }
 
     required init?(coder: NSCoder) {
@@ -27,14 +41,80 @@ class DocViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.addSubview(collectionView)
-        collectionView.register(PDFPageView.self, forCellWithReuseIdentifier: "pdfPage")
-        collectionView.dataSource = self
-        collectionView.delegate = self
+        view.addSubview(pdfDocView)
+        pdfDocView.register(PDFPageView.self, forCellWithReuseIdentifier: "pdfPage")
+        pdfDocView.dataSource = self
+        pdfDocView.delegate = self
     }
-    
+
     override func viewDidLayoutSubviews() {
-        collectionView.frame = view.bounds
+        pdfDocView.frame = view.bounds
+    }
+
+    @objc func zoomPdfView(_ sender: UIPinchGestureRecognizer) {
+        let layout = pdfDocView.collectionViewLayout as! UICollectionViewScaleLayout
+
+        func fixContentOffset() {
+            guard sender.numberOfTouches == 2 else {
+                return
+            }
+            var scaledZoomCenter = zoomCenterInRealContent
+
+            if layout.collectionViewContentSize.width < view.frame.width {
+                scaledZoomCenter.x = layout.contentMidX - zoomCenterXToMidRealContent * sender.scale
+                scaledZoomCenter.y = scaledZoomCenter.y * sender.scale
+            } else {
+                scaledZoomCenter = scaledZoomCenter.applying(CGAffineTransform(scaleX: sender.scale, y: sender.scale))
+            }
+
+            testPoint.center = scaledZoomCenter
+
+            let currentCenter = sender.location(in: pdfDocView)
+
+            var offsetX = scaledZoomCenter.x - currentCenter.x + pdfDocView.contentOffset.x
+            var offsetY = scaledZoomCenter.y - currentCenter.y + pdfDocView.contentOffset.y
+
+            if offsetX + view.frame.width >= pdfDocView.contentSize.width {
+                offsetX = pdfDocView.contentSize.width - view.frame.width
+            }
+            if offsetX <= 0 {
+                offsetX = 0
+            }
+
+            if offsetY + view.frame.height >= pdfDocView.contentSize.height {
+                offsetY = pdfDocView.contentSize.height - view.frame.height
+            }
+            if offsetY <= 0 {
+                offsetY = 0
+            }
+
+            pdfDocView.contentOffset = CGPoint(x: offsetX, y: offsetY)
+        }
+
+        if sender.state == .began {
+            scaleStart = scale
+            zoomCenterInRealContent = sender.location(in: pdfDocView)
+            testPoint.center = zoomCenterInRealContent
+            zoomCenterXToMidRealContent = layout.contentMidX - zoomCenterInRealContent.x
+
+            if layout.collectionViewContentSize.width < view.frame.width {
+                zoomCenterInRealContent.x = zoomCenterInRealContent.x - (view.frame.width - layout.collectionViewContentSize.width)
+            }
+        } else if sender.state == .changed {
+            scale = scaleStart * sender.scale
+            if scale > maxScale {
+                scale = maxScale
+                return
+            } else if scale < miniScale {
+                scale = miniScale
+                return
+            }
+
+            layout.scale = scale
+            layout.invalidateLayout()
+
+            fixContentOffset()
+        }
     }
 }
 
@@ -56,10 +136,10 @@ extension DocViewController: UICollectionViewDataSource {
         let pageView = collectionView.dequeueReusableCell(withReuseIdentifier: "pdfPage", for: indexPath) as! PDFPageView
         if let pdfDoc = pdfDoc, let pdfPage = pdfDoc.page(atIndex: indexPath.row) {
             pageView.set(page: pdfPage)
-        }else {
+        } else {
             pageView.set(page: nil)
         }
-        
+
         return pageView
     }
 }
@@ -74,7 +154,7 @@ extension DocViewController: UICollectionViewDelegateScaleLayout {
         guard let pdfDoc = pdfDoc else {
             return CGSize.zero
         }
-        
+
         return pdfDoc.pageSize(atIndex: indexPath.row)
     }
 }
