@@ -26,7 +26,6 @@ class PDFPageView: UICollectionViewCell {
     private var pdfPage: PDFPage?
     private let annotationLayer = CALayer()
     private var currentAnnotationLayer = CAShapeLayer()
-    private var annotationPoints = [CGPoint]()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -44,30 +43,20 @@ class PDFPageView: UICollectionViewCell {
     func set(page: PDFPage?) {
         pdfPage = page
         annotationLayer.sublayers?.removeAll()
-        annotationPoints.removeAll()
         setNeedsDisplay()
     }
 
-    func drawAnnotation(_ sender: DrawAnnotationGesture) {
-        let point = sender.location(in: self)
-        annotationPoints.append(point)
-
+    func drawAnnotation(_ sender: DrawAnnotationGestureRecognizer) {
         if sender.state == .began {
             currentAnnotationLayer = CAShapeLayer()
             annotationLayer.addSublayer(currentAnnotationLayer)
         }
-        let path = generatePathFromPoints(points: annotationPoints)
-
+        let path = generatePathFromPoints(points: sender.stroke.points)
 
         currentAnnotationLayer.path = path.cgPath
         currentAnnotationLayer.fillColor = nil
         currentAnnotationLayer.opacity = 1.0;
         currentAnnotationLayer.strokeColor = UIColor.red.cgColor
-
-        if sender.state == .ended {
-            annotationPoints.removeAll()
-        }
-
     }
 
 
@@ -81,14 +70,14 @@ class PDFPageView: UICollectionViewCell {
         ctx.restoreGState()
     }
 
-    private func generatePathFromPoints(points: [CGPoint]) -> UIBezierPath {
+    private func generatePathFromPoints(points: [StrokePoint]) -> UIBezierPath {
         let path = UIBezierPath()
-        path.lineWidth = 10
+        path.lineWidth = 1
 
         if points.count > 1 {
             for i in 0..<points.count-1 {
-                let current = points[i]
-                let next = points[i+1]
+                let current = points[i].location
+                let next = points[i+1].location
                 path.move(to: current)
                 path.addLine(to: next)
             }

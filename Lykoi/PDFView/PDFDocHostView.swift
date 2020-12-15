@@ -61,7 +61,7 @@ struct PDFDocHostView: View {
         }
                 .navigationBarTitle("")
                 .navigationBarHidden(true)
-                .gesture(returnGesture)
+//                .gesture(returnGesture)
                 .onAppear {
                     if annotationInDoc.count == 0 {
                         let doc = AnnotationInDoc(context: viewContext)
