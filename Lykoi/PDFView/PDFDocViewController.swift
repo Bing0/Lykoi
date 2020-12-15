@@ -35,6 +35,7 @@ class DocViewController: UIViewController {
     private let maxScale: CGFloat = 8
     private var magnifierView: MagnifyView? = nil
     private var isPencilDetected = false
+    private var pageIndexOfCurrentDrawing = 0
 
     var lastEditingMode: EditingMode {
         willSet {
@@ -183,9 +184,19 @@ class DocViewController: UIViewController {
                 isPencilDetected = true
             }
         }
+        let location = sender.location(in: pdfDocView)
+        guard let indexPath = pdfDocView.indexPathForItem(at: location) else {
+            pageIndexOfCurrentDrawing = -1
+            return
+        }
 
-        print(sender.location(in: pdfDocView))
+        if sender.state == .began {
+            pageIndexOfCurrentDrawing = indexPath.row
+        }
+        guard pageIndexOfCurrentDrawing != -1 else { return }
 
+        let pageView = pdfDocView.cellForItem(at: IndexPath(item: pageIndexOfCurrentDrawing, section: 0)) as! PDFPageView
+        pageView.drawAnnotation(sender)
     }
 
     func switchToPencil() {
