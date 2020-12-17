@@ -18,9 +18,15 @@ struct StrokePoint {
 }
 
 class Stroke {
-    var points = [StrokePoint]()
+    var points  = [StrokePoint]()
+    var newFrom = 0
+    var state   = UIGestureRecognizer.State.possible
 
     func add(point: StrokePoint) {
         points.append(point)
+    }
+
+    func updateTo(index: Int) {
+        newFrom = index
     }
 }

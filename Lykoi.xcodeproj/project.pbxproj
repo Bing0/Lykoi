@@ -10,6 +10,7 @@
 		54096F0DA790CCA933478329 /* Pods_Lykoi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C783A304EC055A4066BB73BC /* Pods_Lykoi.framework */; };
 		CBDFC0BE92F1563F3ADB0B82 /* PDFDoc.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBDFC9EBDF4F157515EB92B0 /* PDFDoc.swift */; };
 		CBDFC27584ABFD61676F61B6 /* PDFPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBDFCEF205C10150AD452C39 /* PDFPage.swift */; };
+		CBDFC46E970566E1BDD91933 /* sample.pdf in Resources */ = {isa = PBXBuildFile; fileRef = CBDFCF9D8157C3B4B7A99FD9 /* sample.pdf */; };
 		CBDFC4F3482BF77FCACB035A /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBDFC54CB21B39898B1FFA61 /* Persistence.swift */; };
 		CBDFC55694996D68DD88E246 /* PDFDocViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBDFC99147B065950931871D /* PDFDocViewController.swift */; };
 		CBDFC6965954D1CF2391FE33 /* PDFDocViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBDFC8AA9112DAEC0BFF69CC /* PDFDocViewModel.swift */; };
@@ -31,7 +32,7 @@
 		E99D30412584F54A00944B40 /* EditorBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99D303D2584F54A00944B40 /* EditorBarView.swift */; };
 		E99D30422584F54A00944B40 /* TopBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99D303E2584F54A00944B40 /* TopBarView.swift */; };
 		E99D30462584F62A00944B40 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99D30452584F62A00944B40 /* Models.swift */; };
-		E9C5CBCA258A753E006BF0ED /* DrawAnnotationGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C5CBC9258A753E006BF0ED /* DrawAnnotationGestureRecognizer.swift */; };
+		E9C5CBCA258A753E006BF0ED /* DragGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C5CBC9258A753E006BF0ED /* DragGestureRecognizer.swift */; };
 		E9C5CBCD258A759D006BF0ED /* StrokeCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C5CBCC258A759D006BF0ED /* StrokeCollection.swift */; };
 		E9C5CBD0258A7616006BF0ED /* UICollectionViewScaleLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C5CBCF258A7616006BF0ED /* UICollectionViewScaleLayout.swift */; };
 /* End PBXBuildFile section */
@@ -47,6 +48,7 @@
 		CBDFC99147B065950931871D /* PDFDocViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PDFDocViewController.swift; sourceTree = "<group>"; };
 		CBDFC9EBDF4F157515EB92B0 /* PDFDoc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PDFDoc.swift; sourceTree = "<group>"; };
 		CBDFCEF205C10150AD452C39 /* PDFPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PDFPage.swift; sourceTree = "<group>"; };
+		CBDFCF9D8157C3B4B7A99FD9 /* sample.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = sample.pdf; sourceTree = "<group>"; };
 		E95F54DA2584568500510006 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.0.sdk/usr/lib/libc++.tbd"; sourceTree = DEVELOPER_DIR; };
 		E95F54DD2584574B00510006 /* Lykoi-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Lykoi-Bridging-Header.h"; sourceTree = "<group>"; };
 		E95F54E32584579500510006 /* fpdfview.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fpdfview.h; sourceTree = "<group>"; };
@@ -88,7 +90,7 @@
 		E99D303D2584F54A00944B40 /* EditorBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditorBarView.swift; sourceTree = "<group>"; };
 		E99D303E2584F54A00944B40 /* TopBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopBarView.swift; sourceTree = "<group>"; };
 		E99D30452584F62A00944B40 /* Models.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
-		E9C5CBC9258A753E006BF0ED /* DrawAnnotationGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawAnnotationGestureRecognizer.swift; sourceTree = "<group>"; };
+		E9C5CBC9258A753E006BF0ED /* DragGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragGestureRecognizer.swift; sourceTree = "<group>"; };
 		E9C5CBCC258A759D006BF0ED /* StrokeCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrokeCollection.swift; sourceTree = "<group>"; };
 		E9C5CBCF258A7616006BF0ED /* UICollectionViewScaleLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionViewScaleLayout.swift; sourceTree = "<group>"; };
 		FC71EAD9A458962266DB32AD /* Pods-Lykoi.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lykoi.debug.xcconfig"; path = "Target Support Files/Pods-Lykoi/Pods-Lykoi.debug.xcconfig"; sourceTree = "<group>"; };
@@ -216,6 +218,7 @@
 			isa = PBXGroup;
 			children = (
 				E96284712583AE5F0012FFE3 /* Preview Assets.xcassets */,
+				CBDFCF9D8157C3B4B7A99FD9 /* sample.pdf */,
 			);
 			path = "Preview Content";
 			sourceTree = "<group>";
@@ -250,7 +253,7 @@
 			isa = PBXGroup;
 			children = (
 				E99D30452584F62A00944B40 /* Models.swift */,
-				E9C5CBC9258A753E006BF0ED /* DrawAnnotationGestureRecognizer.swift */,
+				E9C5CBC9258A753E006BF0ED /* DragGestureRecognizer.swift */,
 				E9C5CBCC258A759D006BF0ED /* StrokeCollection.swift */,
 				E9C5CBCF258A7616006BF0ED /* UICollectionViewScaleLayout.swift */,
 			);
@@ -319,6 +322,7 @@
 			files = (
 				E96284722583AE5F0012FFE3 /* Preview Assets.xcassets in Resources */,
 				E962846F2583AE5F0012FFE3 /* Assets.xcassets in Resources */,
+				CBDFC46E970566E1BDD91933 /* sample.pdf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -371,7 +375,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E9C5CBCA258A753E006BF0ED /* DrawAnnotationGestureRecognizer.swift in Sources */,
+				E9C5CBCA258A753E006BF0ED /* DragGestureRecognizer.swift in Sources */,
 				E96284772583AE5F0012FFE3 /* Lykoi.xcdatamodeld in Sources */,
 				E99D30412584F54A00944B40 /* EditorBarView.swift in Sources */,
 				E99D30392584F54100944B40 /* LyDividerView.swift in Sources */,

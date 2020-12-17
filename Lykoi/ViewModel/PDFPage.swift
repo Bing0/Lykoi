@@ -57,9 +57,42 @@ class PDFPage: NSObject {
         ctx.drawPDFPage(cgPage)
     }
 
+    func charIndex(at location: CGPoint) -> Int? {
+        let x         = Double(location.x)
+        let y         = Double(pageSize.height) - Double(location.y)
+        let charIndex = FPDFText_GetCharIndexAtPos(fpTextPage, x, y, selectionTolerance, selectionTolerance)
+
+        if charIndex >= 0 {
+            return Int(charIndex)
+        } else {
+            return nil
+        }
+    }
+
+    func charBox(at index: Int) -> CGRect? {
+        var left:   Double = 0
+        var top:    Double = 0
+        var right:  Double = 0
+        var bottom: Double = 0
+
+        guard FPDFText_GetCharBox(fpTextPage, Int32(index), &left, &top, &right, &bottom) == 1 else { return nil }
+
+        top = Double(pageSize.height) - top
+        bottom = Double(pageSize.height) - bottom
+
+        let rect = CGRect(x: left, y: top, width: right - left, height: bottom - top)
+
+        return rect
+    }
+
+    func charBox(at location: CGPoint) -> CGRect? {
+        guard let index = charIndex(at: location) else { return nil }
+        return charBox(at: index)
+    }
+
     func searchWordIndex(around point: CGPoint) -> (startIndex: Int, endIndex: Int)? {
         let x         = Double(point.x)
-        let y         = Double(point.y)
+        let y         = Double(pageSize.height) - Double(point.y)
         let charIndex = FPDFText_GetCharIndexAtPos(fpTextPage, x, y, selectionTolerance, selectionTolerance)
         if charIndex < 0 {
             return nil
@@ -85,6 +118,14 @@ class PDFPage: NSObject {
             }
         }
         return rects
+    }
+
+    func getRects(withinCharIndex index1: Int, andCharIndex index2: Int) -> [CGRect] {
+        if index1 < index2 {
+            return getRects(fromCharIndex: index1, toCharIndex: index2)
+        } else {
+            return getRects(fromCharIndex: index2, toCharIndex: index1)
+        }
     }
 
     private func getTextRects(atIndex index: Int) -> CGRect? {

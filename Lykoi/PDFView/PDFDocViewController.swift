@@ -19,7 +19,7 @@ class DocViewController: UIViewController {
     private var isPencilDetected                          = false
     private var pageIndexOfCurrentDrawing                 = 0
 
-    var lastEditingMode: EditingMode {
+    var currentEditingMode: EditingMode {
         willSet {
             switch newValue {
                 case .hand:
@@ -27,20 +27,21 @@ class DocViewController: UIViewController {
                     if !pdfDocView.panGestureRecognizer.allowedTouchTypes.contains(UITouch.TouchType.pencil.rawValue as NSNumber) {
                         pdfDocView.panGestureRecognizer.allowedTouchTypes.append(UITouch.TouchType.pencil.rawValue as NSNumber)
                     }
-                    if pdfDocView.gestureRecognizers!.contains(drawAnnotationGesture) {
-                        pdfDocView.removeGestureRecognizer(drawAnnotationGesture)
+                    if pdfDocView.gestureRecognizers!.contains(dragGesture) {
+                        pdfDocView.removeGestureRecognizer(dragGesture)
                     }
                 case .highlight:
-                    pdfDocView.panGestureRecognizer.minimumNumberOfTouches = 1
-                    if !pdfDocView.panGestureRecognizer.allowedTouchTypes.contains(UITouch.TouchType.pencil.rawValue as NSNumber) {
-                        pdfDocView.panGestureRecognizer.allowedTouchTypes.append(UITouch.TouchType.pencil.rawValue as NSNumber)
-                    }
-                    if pdfDocView.gestureRecognizers!.contains(drawAnnotationGesture) {
-                        pdfDocView.removeGestureRecognizer(drawAnnotationGesture)
-                    }
+//                    pdfDocView.panGestureRecognizer.minimumNumberOfTouches = 1
+//                    if !pdfDocView.panGestureRecognizer.allowedTouchTypes.contains(UITouch.TouchType.pencil.rawValue as NSNumber) {
+//                        pdfDocView.panGestureRecognizer.allowedTouchTypes.append(UITouch.TouchType.pencil.rawValue as NSNumber)
+//                    }
+//                    if pdfDocView.gestureRecognizers!.contains(dragGesture) {
+//                        pdfDocView.removeGestureRecognizer(dragGesture)
+//                    }
+                    fallthrough
                 case .draw:
-                    drawAnnotationGesture = DrawAnnotationGestureRecognizer(target: self, action: #selector(DocViewController.drawAnnotation(_:)))
-                    drawAnnotationGesture.updateCoordinateSpaceView = { location in
+                    dragGesture = DragGestureRecognizer(target: self, action: #selector(DocViewController.dragging(_:)))
+                    dragGesture.updateCoordinateSpaceView = { location in
                         if let indexPath = self.pdfDocView.indexPathForItem(at: location) {
                             let pageView = self.pdfDocView.cellForItem(at: indexPath) as! PDFPageView
                             return pageView
@@ -49,11 +50,11 @@ class DocViewController: UIViewController {
                     }
 
                     if isPencilDetected {
-                        switchToPencil()
-                        pdfDocView.addGestureRecognizer(drawAnnotationGesture)
+                        switchToPencilDraw()
+                        pdfDocView.addGestureRecognizer(dragGesture)
                     } else {
-                        switchToHand()
-                        pdfDocView.addGestureRecognizer(drawAnnotationGesture)
+                        switchToHandDraw()
+                        pdfDocView.addGestureRecognizer(dragGesture)
                     }
             }
         }
@@ -65,10 +66,10 @@ class DocViewController: UIViewController {
         return cv
     }()
 
-    var drawAnnotationGesture = DrawAnnotationGestureRecognizer()
+    var dragGesture = DragGestureRecognizer()
 
     init(url: URL, editingMode: EditingMode) {
-        lastEditingMode = editingMode
+        currentEditingMode = editingMode
 
         super.init(nibName: nil, bundle: nil)
         pdfDoc = PDFDoc(withURL: url)
@@ -77,11 +78,11 @@ class DocViewController: UIViewController {
         testPoint.frame.size = CGSize(width: 3, height: 3)
         pdfDocView.addSubview(testPoint)
         let zoomGesture = UIPinchGestureRecognizer(target: self, action: #selector(DocViewController.zoomPdfView(_:)))
-        view.addGestureRecognizer(zoomGesture)
+        pdfDocView.addGestureRecognizer(zoomGesture)
     }
 
     required init?(coder: NSCoder) {
-        lastEditingMode = .hand
+        currentEditingMode = .hand
         super.init(coder: coder)
     }
 
@@ -164,31 +165,37 @@ class DocViewController: UIViewController {
         }
     }
 
-    @objc func drawAnnotation(_ sender: DrawAnnotationGestureRecognizer) {
+    @objc func dragging(_ sender: DragGestureRecognizer) {
         if !isPencilDetected {
             if sender.isPencilDetected {
-                switchToPencil()
+                switchToPencilDraw()
                 isPencilDetected = true
             }
         }
+
+        sender.stroke.state = sender.state
 
         guard let pageView = sender.coordinateSpaceView as? PDFPageView else {
             return
         }
 
-        pageView.drawAnnotation(sender)
+        if currentEditingMode == .draw {
+            pageView.drawAnnotation(sender.stroke)
+        }else if currentEditingMode == .highlight {
+            pageView.drawHighlight(sender.stroke)
+        }
     }
 
-    func switchToPencil() {
-        drawAnnotationGesture.allowedTouchTypes = [UITouch.TouchType.pencil.rawValue as NSNumber]
+    func switchToPencilDraw() {
+        dragGesture.allowedTouchTypes = [UITouch.TouchType.pencil.rawValue as NSNumber]
         pdfDocView.panGestureRecognizer.allowedTouchTypes = pdfDocView.panGestureRecognizer.allowedTouchTypes.filter { type in
             type != UITouch.TouchType.pencil.rawValue as NSNumber
         }
         pdfDocView.panGestureRecognizer.minimumNumberOfTouches = 1
     }
 
-    func switchToHand() {
-        drawAnnotationGesture.allowedTouchTypes = UIPanGestureRecognizer().allowedTouchTypes
+    func switchToHandDraw() {
+        dragGesture.allowedTouchTypes = UIPanGestureRecognizer().allowedTouchTypes
         if !pdfDocView.panGestureRecognizer.allowedTouchTypes.contains(UITouch.TouchType.pencil.rawValue as NSNumber) {
             pdfDocView.panGestureRecognizer.allowedTouchTypes.append(UITouch.TouchType.pencil.rawValue as NSNumber)
         }
@@ -196,8 +203,8 @@ class DocViewController: UIViewController {
     }
 
     func setEditingMode(editingMode: EditingMode) {
-        if lastEditingMode != editingMode {
-            lastEditingMode = editingMode
+        if currentEditingMode != editingMode {
+            currentEditingMode = editingMode
         }
     }
 }

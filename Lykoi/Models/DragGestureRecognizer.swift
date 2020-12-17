@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DrawAnnotationGestureRecognizer: UIGestureRecognizer {
+class DragGestureRecognizer: UIGestureRecognizer {
     var isPencilDetected = false
     var trackedTouch:     UITouch?
     var initialTimestamp: TimeInterval?
