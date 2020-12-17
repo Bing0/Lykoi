@@ -51,9 +51,9 @@ class PDFPage: NSObject {
         // TODO:  check iOS or macOS
         ctx.scaleBy(x: 1.0, y: -1.0)
         ctx.concatenate(cgPage.getDrawingTransform(.cropBox,
-                rect: CGRect(origin: .zero, size: pageSize),
-                rotate: 0,
-                preserveAspectRatio: true))
+                                                   rect: CGRect(origin: .zero, size: pageSize),
+                                                   rotate: 0,
+                                                   preserveAspectRatio: true))
         ctx.drawPDFPage(cgPage)
     }
 

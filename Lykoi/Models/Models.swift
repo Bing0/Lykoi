@@ -9,7 +9,7 @@ import Foundation
 
 struct ParentInfo: Hashable {
     var name: String
-    var url: URL
+    var url:  URL
 }
 
 struct DirectoryContent {
@@ -36,7 +36,7 @@ struct DirectoryContent {
         _parentsInfo = [ParentInfo]()
 
         let rootURL = getDocumentsDirectory()
-        var tmpURL = currentURL
+        var tmpURL  = currentURL
         while tmpURL != rootURL {
             let name = tmpURL.lastPathComponent
             _parentsInfo.append(ParentInfo(name: name, url: tmpURL))
@@ -57,14 +57,15 @@ fileprivate func getDocumentsDirectory() -> URL {
 
 
 fileprivate func urlOfContents(in documentsURL: URL, skipsHiddenFiles: Bool = true) -> [URL] {
-    let fileURLs = try? FileManager.default.contentsOfDirectory(at: documentsURL, includingPropertiesForKeys: nil, options: skipsHiddenFiles ? .skipsHiddenFiles : [])
+    let fileURLs
+        = try? FileManager.default.contentsOfDirectory(at: documentsURL, includingPropertiesForKeys: nil, options: skipsHiddenFiles ? .skipsHiddenFiles : [])
     return fileURLs ?? [URL]()
 }
 
 extension URL {
     func relativeToHome() -> String {
         let homeAbsolutePath = getDocumentsDirectory().resolvingSymlinksInPath().absoluteString
-        let absoluteString = resolvingSymlinksInPath().absoluteString
+        let absoluteString   = resolvingSymlinksInPath().absoluteString
         guard absoluteString.hasPrefix(homeAbsolutePath) else {
             return self.absoluteString
         }

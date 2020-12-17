@@ -16,16 +16,17 @@ class PDFDocViewModel: ObservableObject {
         directoryContent = DirectoryContent()
         monitorURLOf(directoryContent.currentURL)
 
-        var config = FPDF_LIBRARY_CONFIG(version: 3, m_pUserFontPaths: nil, m_pIsolate: nil, m_v8EmbedderSlot: 0, m_pPlatform: nil)
+        var config
+            = FPDF_LIBRARY_CONFIG(version: 3, m_pUserFontPaths: nil, m_pIsolate: nil, m_v8EmbedderSlot: 0, m_pPlatform: nil)
         FPDF_InitLibraryWithConfig(&config)
     }
-    
+
     deinit {
         FPDF_DestroyLibrary()
     }
 
     func copy(from sourceURL: URL) {
-        let fileName = sourceURL.lastPathComponent
+        let fileName       = sourceURL.lastPathComponent
         let destinationURL = directoryContent.currentURL.appendingPathComponent(fileName)
         let isAccessing: Bool
         do {
@@ -68,9 +69,9 @@ fileprivate class FolderMonitor {
     /// A file descriptor for the monitored directory.
     private var monitoredFolderFileDescriptor: CInt = -1
     /// A dispatch queue used for sending file changes in the directory.
-    private let folderMonitorQueue = DispatchQueue(label: "FolderMonitorQueue", attributes: .concurrent)
+    private let folderMonitorQueue                  = DispatchQueue(label: "FolderMonitorQueue", attributes: .concurrent)
     /// A dispatch source to monitor a file descriptor created from the directory.
-    private var folderMonitorSource: DispatchSourceFileSystemObject?
+    private var folderMonitorSource:           DispatchSourceFileSystemObject?
     /// URL for the directory being monitored.
     let url: Foundation.URL
 

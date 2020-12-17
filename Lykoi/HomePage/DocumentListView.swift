@@ -13,15 +13,15 @@ struct DocumentListView: View {
     var body: some View {
         VStack(spacing: 8) {
             ForEach(pdfDocViewModel.directoryContent.content, id: \.self) { contentURL in
-                let fileName = contentURL.lastPathComponent
+                let fileName    = contentURL.lastPathComponent
                 let isDirectory = !contentURL.isFileURL
 
                 if isDirectory {
                     HStack {
                         DocumentListItemView(isDirectory: isDirectory, fileName: fileName)
-                                .onTapGesture {
-                                    pdfDocViewModel.enter(newURL: contentURL)
-                                }
+                            .onTapGesture {
+                                pdfDocViewModel.enter(newURL: contentURL)
+                            }
                         Image(systemName: "slider.vertical.3")
                     }
                 } else {

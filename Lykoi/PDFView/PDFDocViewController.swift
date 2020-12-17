@@ -7,61 +7,61 @@ import UIKit
 
 
 class DocViewController: UIViewController {
-    private var pdfDoc: PDFDoc?
-    private var scale: CGFloat = 1.0
-    private var scaleStart: CGFloat = 1.0
-    private var zoomCenterInRealContent: CGPoint = .zero
-    private var zoomCenterXToMidRealContent: CGFloat = 0
-    private var testPoint = UIView(frame: .init())
-    private let miniScale: CGFloat = 0.25
-    private let maxScale: CGFloat = 8
-    private var magnifierView: MagnifyView? = nil
-    private var isPencilDetected = false
-    private var pageIndexOfCurrentDrawing = 0
+    private var pdfDoc:                      PDFDoc?
+    private var scale:                       CGFloat      = 1.0
+    private var scaleStart:                  CGFloat      = 1.0
+    private var zoomCenterInRealContent:     CGPoint      = .zero
+    private var zoomCenterXToMidRealContent: CGFloat      = 0
+    private var testPoint                                 = UIView(frame: .init())
+    private let miniScale:                   CGFloat      = 0.25
+    private let maxScale:                    CGFloat      = 8
+    private var magnifierView:               MagnifyView? = nil
+    private var isPencilDetected                          = false
+    private var pageIndexOfCurrentDrawing                 = 0
 
     var lastEditingMode: EditingMode {
         willSet {
             switch newValue {
-            case .hand:
-                pdfDocView.panGestureRecognizer.minimumNumberOfTouches = 1
-                if !pdfDocView.panGestureRecognizer.allowedTouchTypes.contains(UITouch.TouchType.pencil.rawValue as NSNumber) {
-                    pdfDocView.panGestureRecognizer.allowedTouchTypes.append(UITouch.TouchType.pencil.rawValue as NSNumber)
-                }
-                if pdfDocView.gestureRecognizers!.contains(drawAnnotationGesture) {
-                    pdfDocView.removeGestureRecognizer(drawAnnotationGesture)
-                }
-            case .highlight:
-                pdfDocView.panGestureRecognizer.minimumNumberOfTouches = 1
-                if !pdfDocView.panGestureRecognizer.allowedTouchTypes.contains(UITouch.TouchType.pencil.rawValue as NSNumber) {
-                    pdfDocView.panGestureRecognizer.allowedTouchTypes.append(UITouch.TouchType.pencil.rawValue as NSNumber)
-                }
-                if pdfDocView.gestureRecognizers!.contains(drawAnnotationGesture) {
-                    pdfDocView.removeGestureRecognizer(drawAnnotationGesture)
-                }
-            case .draw:
-                drawAnnotationGesture = DrawAnnotationGestureRecognizer(target: self, action: #selector(DocViewController.drawAnnotation(_:)))
-                drawAnnotationGesture.updateCoordinateSpaceView = { location in
-                    if let indexPath = self.pdfDocView.indexPathForItem(at: location) {
-                        let pageView = self.pdfDocView.cellForItem(at: indexPath) as! PDFPageView
-                        return pageView
+                case .hand:
+                    pdfDocView.panGestureRecognizer.minimumNumberOfTouches = 1
+                    if !pdfDocView.panGestureRecognizer.allowedTouchTypes.contains(UITouch.TouchType.pencil.rawValue as NSNumber) {
+                        pdfDocView.panGestureRecognizer.allowedTouchTypes.append(UITouch.TouchType.pencil.rawValue as NSNumber)
                     }
-                    return self.pdfDocView
-                }
-                
-                if isPencilDetected {
-                    switchToPencil()
-                    pdfDocView.addGestureRecognizer(drawAnnotationGesture)
-                }else {
-                    switchToHand()
-                    pdfDocView.addGestureRecognizer(drawAnnotationGesture)
-                }
+                    if pdfDocView.gestureRecognizers!.contains(drawAnnotationGesture) {
+                        pdfDocView.removeGestureRecognizer(drawAnnotationGesture)
+                    }
+                case .highlight:
+                    pdfDocView.panGestureRecognizer.minimumNumberOfTouches = 1
+                    if !pdfDocView.panGestureRecognizer.allowedTouchTypes.contains(UITouch.TouchType.pencil.rawValue as NSNumber) {
+                        pdfDocView.panGestureRecognizer.allowedTouchTypes.append(UITouch.TouchType.pencil.rawValue as NSNumber)
+                    }
+                    if pdfDocView.gestureRecognizers!.contains(drawAnnotationGesture) {
+                        pdfDocView.removeGestureRecognizer(drawAnnotationGesture)
+                    }
+                case .draw:
+                    drawAnnotationGesture = DrawAnnotationGestureRecognizer(target: self, action: #selector(DocViewController.drawAnnotation(_:)))
+                    drawAnnotationGesture.updateCoordinateSpaceView = { location in
+                        if let indexPath = self.pdfDocView.indexPathForItem(at: location) {
+                            let pageView = self.pdfDocView.cellForItem(at: indexPath) as! PDFPageView
+                            return pageView
+                        }
+                        return self.pdfDocView
+                    }
+
+                    if isPencilDetected {
+                        switchToPencil()
+                        pdfDocView.addGestureRecognizer(drawAnnotationGesture)
+                    } else {
+                        switchToHand()
+                        pdfDocView.addGestureRecognizer(drawAnnotationGesture)
+                    }
             }
         }
     }
 
     lazy var pdfDocView: UICollectionView = {
         let layout = UICollectionViewScaleLayout()
-        let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        let cv     = UICollectionView(frame: .zero, collectionViewLayout: layout)
         return cv
     }()
 
@@ -171,11 +171,11 @@ class DocViewController: UIViewController {
                 isPencilDetected = true
             }
         }
-        
+
         guard let pageView = sender.coordinateSpaceView as? PDFPageView else {
             return
         }
-        
+
         pageView.drawAnnotation(sender)
     }
 
@@ -217,7 +217,8 @@ extension DocViewController: UICollectionViewDataSource {
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let pageView = collectionView.dequeueReusableCell(withReuseIdentifier: "pdfPage", for: indexPath) as! PDFPageView
+        let pageView
+            = collectionView.dequeueReusableCell(withReuseIdentifier: "pdfPage", for: indexPath) as! PDFPageView
         if let pdfDoc = pdfDoc, let pdfPage = pdfDoc.page(atIndex: indexPath.row) {
             pageView.set(page: pdfPage)
         } else {
@@ -244,11 +245,10 @@ extension DocViewController: UICollectionViewDelegateScaleLayout {
 }
 
 
-
 struct PDFDocViewController: UIViewControllerRepresentable {
-    var url: URL
-    var annotationInDoc: AnnotationInDoc?
-    @Binding var editingMode: EditingMode
+    var          url:             URL
+    var          annotationInDoc: AnnotationInDoc?
+    @Binding var editingMode:     EditingMode
 
     func makeCoordinator() -> Coordinator {
         Coordinator(self)

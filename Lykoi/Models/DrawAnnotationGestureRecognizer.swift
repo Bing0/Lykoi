@@ -9,21 +9,21 @@ import UIKit
 
 class DrawAnnotationGestureRecognizer: UIGestureRecognizer {
     var isPencilDetected = false
-    var trackedTouch: UITouch?
+    var trackedTouch:     UITouch?
     var initialTimestamp: TimeInterval?
-    var stroke = Stroke()
+    var stroke           = Stroke()
 
     var fingerStartTimer: Timer?
     private let cancellationTimeInterval = TimeInterval(0.1)
     var coordinateSpaceView: UIView?
-    
+
     var updateCoordinateSpaceView: ((_ location: CGPoint) -> UIView)?
 
     func append(touches: Set<UITouch>, event: UIEvent?) -> Bool {
         // Check that we have a touch to append, and that touches
         // doesn't contain it.
         guard let touchToAppend = trackedTouch, touches.contains(touchToAppend) == true
-                else {
+            else {
             return false
         }
 
@@ -41,7 +41,7 @@ class DrawAnnotationGestureRecognizer: UIGestureRecognizer {
             let coalescedTouches = event.coalescedTouches(for: touchToAppend)!
             for touch in coalescedTouches {
                 let location = touch.location(in: coordinateSpaceView)
-                let point = StrokePoint(timestamp: touch.timestamp, location: location)
+                let point    = StrokePoint(timestamp: touch.timestamp, location: location)
                 stroke.add(point: point)
             }
         }
@@ -53,36 +53,36 @@ class DrawAnnotationGestureRecognizer: UIGestureRecognizer {
         var shouldCancel = false
         for touch in touches {
             if touch !== touchToAppend &&
-                       touch.timestamp - initialTimestamp! < cancellationTimeInterval {
+               touch.timestamp - initialTimestamp! < cancellationTimeInterval {
                 shouldCancel = true
                 break
             }
         }
         return shouldCancel
     }
-    
+
     override func location(in view: UIView?) -> CGPoint {
         guard let touchToAppend = trackedTouch else {
             return CGPoint.zero
         }
         let location = touchToAppend.location(in: view)
         return location
-        
+
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent) {
         if trackedTouch == nil {
             trackedTouch = touches.first
             initialTimestamp = trackedTouch?.timestamp
-            
+
             coordinateSpaceView = updateCoordinateSpaceView?(trackedTouch!.location(in: view!))
-            
+
             if isPencilDetected == false {
                 if trackedTouch?.type == UITouch.TouchType.pencil {
                     isPencilDetected = true
                 }
             }
-            
+
             if trackedTouch?.type != .pencil {
                 // Give other gestures, such as pan and pinch, a chance by
                 // slightly delaying the `.begin.
@@ -103,8 +103,8 @@ class DrawAnnotationGestureRecognizer: UIGestureRecognizer {
                 state = .began
             }
         }
-        
-        
+
+
         if isPencilDetected == false {
             if touches.first?.type == UITouch.TouchType.pencil {
                 isPencilDetected = true

@@ -7,9 +7,9 @@ import CoreGraphics
 
 class PDFDoc: NSObject {
 
-    private var cgPDF: CGPDFDocument
-    private var fpPDF: FPDF_DOCUMENT
-    private var pages: NSMapTable<NSNumber, PDFPage>
+    private var cgPDF:         CGPDFDocument
+    private var fpPDF:         FPDF_DOCUMENT
+    private var pages:         NSMapTable<NSNumber, PDFPage>
     private var intToNSNumber: [Int: NSNumber]
 
     var numberOfPages: Int {
@@ -38,7 +38,7 @@ class PDFDoc: NSObject {
     }
 
     func pageSize(atIndex index: Int) -> CGSize {
-        var width: Double = 0
+        var width:  Double = 0
         var height: Double = 0
 
         FPDF_GetPageSizeByIndex(fpPDF, Int32(index), &width, &height)

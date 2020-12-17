@@ -10,8 +10,8 @@ import SwiftUI
 struct LyDividerView: View {
     var body: some View {
         Rectangle()
-                .frame(height: 1)
-                .opacity(0.5)
+            .frame(height: 1)
+            .opacity(0.5)
     }
 }
 

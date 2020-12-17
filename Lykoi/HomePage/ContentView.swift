@@ -10,7 +10,7 @@ import CoreData
 import PDFKit
 
 #if os(iOS)
-import MobileCoreServices
+    import MobileCoreServices
 #endif
 
 struct ContentView: View {
@@ -22,15 +22,15 @@ struct ContentView: View {
                 HomePageTopBarView(pdfDocViewModel: pdfDocViewModel)
                 DocumentListView(pdfDocViewModel: pdfDocViewModel)
                 Rectangle()
-                        .fill(Color.white.opacity(0.01))
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .fill(Color.white.opacity(0.01))
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
                 HomePageActionBar()
             }
-                    .navigationBarTitle("")
-                    .navigationBarHidden(true)
-                    .onDrop(of: [String(kUTTypePDF)], delegate: PDFDropDelegate(pdfDocViewModel: pdfDocViewModel))
+                .navigationBarTitle("")
+                .navigationBarHidden(true)
+                .onDrop(of: [String(kUTTypePDF)], delegate: PDFDropDelegate(pdfDocViewModel: pdfDocViewModel))
         }
-                .navigationViewStyle(StackNavigationViewStyle())
+            .navigationViewStyle(StackNavigationViewStyle())
 
     }
 }

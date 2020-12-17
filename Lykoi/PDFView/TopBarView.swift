@@ -9,6 +9,7 @@ import SwiftUI
 
 struct TopBarView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+
     var title: String
 
     var body: some View {
@@ -16,7 +17,7 @@ struct TopBarView: View {
             ZStack(alignment: Alignment(horizontal: .leading, vertical: .center)) {
                 HStack {
                     Spacer()
-                            .frame(width: 8)
+                        .frame(width: 8)
                     Button(action: {
                         presentationMode.wrappedValue.dismiss()
                     }) {
@@ -24,12 +25,12 @@ struct TopBarView: View {
                     }
                 }
                 Spacer()
-                        .frame(maxWidth: .infinity)
+                    .frame(maxWidth: .infinity)
             }
             Text("\(title)")
-                    .lineLimit(1)
+                .lineLimit(1)
             Spacer()
-                    .frame(maxWidth: .infinity)
+                .frame(maxWidth: .infinity)
         }
     }
 }

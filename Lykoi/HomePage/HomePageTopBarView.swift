@@ -20,23 +20,23 @@ struct HomePageTopBarView: View {
                                 Image(systemName: "chevron.forward")
                             }
                             Text("\(pdfDocViewModel.directoryContent.parentsInfo[index].name)")
-                                    .font(.title2)
-                                    .onTapGesture {
-                                        pdfDocViewModel.enter(newURL: pdfDocViewModel.directoryContent.parentsInfo[index].url)
+                                .font(.title2)
+                                .onTapGesture {
+                                    pdfDocViewModel.enter(newURL: pdfDocViewModel.directoryContent.parentsInfo[index].url)
+                                }
+                                .lineLimit(1)
+                                .id(index == (pdfDocViewModel.directoryContent.parentsInfo.count - 1) ? "scrollToHere" : "B")
+                                .onAppear {
+                                    withAnimation {
+                                        value.scrollTo("scrollToHere")
                                     }
-                                    .lineLimit(1)
-                                    .id(index == (pdfDocViewModel.directoryContent.parentsInfo.count - 1) ? "scrollToHere" : "B")
-                                    .onAppear {
-                                        withAnimation {
-                                            value.scrollTo("scrollToHere")
-                                        }
-                                    }
+                                }
                         }
                         Spacer()
                     }
                 }
             }
-                    .background(Color.init("HomePageTopBarColor"))
+                .background(Color.init("HomePageTopBarColor"))
 
             LyDividerView()
         }

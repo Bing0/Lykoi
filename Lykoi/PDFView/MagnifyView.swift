@@ -6,7 +6,7 @@ import UIKit
 
 class MagnifyView: UIView {
     var viewToMagnify: UIView!
-    var touchPoint: CGPoint!
+    var touchPoint:    CGPoint!
 
     override init(frame: CGRect) {
         super.init(frame: frame)

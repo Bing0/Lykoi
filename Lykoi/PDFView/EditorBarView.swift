@@ -13,22 +13,22 @@ struct EditorBarView: View {
     var body: some View {
         HStack(spacing: 8) {
             Spacer()
-                    .frame(width: 8)
+                .frame(width: 8)
             Image(systemName: "hand.point.up")
-                    .background(editingMode == .hand ? Color.gray : Color.clear)
-                    .onTapGesture {
-                        editingMode = .hand
-                    }
+                .background(editingMode == .hand ? Color.gray : Color.clear)
+                .onTapGesture {
+                    editingMode = .hand
+                }
             Image(systemName: "scribble")
-                    .background(editingMode == .draw ? Color.gray : Color.clear)
-                    .onTapGesture {
-                        editingMode = .draw
-                    }
+                .background(editingMode == .draw ? Color.gray : Color.clear)
+                .onTapGesture {
+                    editingMode = .draw
+                }
             Image(systemName: "highlighter")
-                    .background(editingMode == .highlight ? Color.gray : Color.clear)
-                    .onTapGesture {
-                        editingMode = .highlight
-                    }
+                .background(editingMode == .highlight ? Color.gray : Color.clear)
+                .onTapGesture {
+                    editingMode = .highlight
+                }
             Spacer()
         }
     }

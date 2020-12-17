@@ -24,7 +24,7 @@ private class PDFTiledLayer: CATiledLayer {
 
 class PDFPageView: UICollectionViewCell {
     private var pdfPage: PDFPage?
-    private let annotationLayer = CALayer()
+    private let annotationLayer        = CALayer()
     private var currentAnnotationLayer = CAShapeLayer()
 
     override init(frame: CGRect) {
@@ -75,9 +75,9 @@ class PDFPageView: UICollectionViewCell {
         path.lineWidth = 1
 
         if points.count > 1 {
-            for i in 0..<points.count-1 {
+            for i in 0..<points.count - 1 {
                 let current = points[i].location
-                let next = points[i+1].location
+                let next    = points[i + 1].location
                 path.move(to: current)
                 path.addLine(to: next)
             }

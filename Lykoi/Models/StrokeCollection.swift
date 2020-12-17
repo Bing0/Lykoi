@@ -9,7 +9,7 @@ import UIKit
 
 struct StrokePoint {
     let timestamp: TimeInterval
-    let location: CGPoint
+    let location:  CGPoint
 
     init(timestamp: TimeInterval, location: CGPoint) {
         self.timestamp = timestamp
