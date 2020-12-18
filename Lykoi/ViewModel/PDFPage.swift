@@ -75,7 +75,7 @@ class PDFPage: NSObject {
         var right:  Double = 0
         var bottom: Double = 0
 
-        guard FPDFText_GetCharBox(fpTextPage, Int32(index), &left, &top, &right, &bottom) == 1 else { return nil }
+        guard FPDFText_GetCharBox(fpTextPage, Int32(index), &left, &right, &bottom, &top) == 1 else { return nil }
 
         top = Double(pageSize.height) - top
         bottom = Double(pageSize.height) - bottom
@@ -109,7 +109,7 @@ class PDFPage: NSObject {
     }
 
     func getRects(fromCharIndex startIndex: Int, toCharIndex endIndex: Int) -> [CGRect] {
-        let rectsCount = FPDFText_CountRects(fpTextPage, Int32(startIndex), Int32(endIndex - startIndex))
+        let rectsCount = FPDFText_CountRects(fpTextPage, Int32(startIndex), Int32(endIndex - startIndex + 1))
         var rects      = [CGRect]()
 
         for index in 0..<Int(rectsCount) {
