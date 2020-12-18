@@ -4,13 +4,12 @@
 
 import UIKit
 
-private class PDFTiledLayer: CATiledLayer {
-
+private class PDFPageTileLayer: CATiledLayer {
     override init() {
         super.init()
-        levelsOfDetail = 1
-        levelsOfDetailBias = 2
-        tileSize = CGSize(width: 256, height: 256)
+        levelsOfDetail = 2
+        levelsOfDetailBias = 4
+        tileSize = CGSize(width: 1024, height: 1024)
     }
 
     override class func fadeDuration() -> CFTimeInterval {
@@ -22,56 +21,47 @@ private class PDFTiledLayer: CATiledLayer {
     }
 }
 
+class LayerDelegate: NSObject, CALayerDelegate {
+    var pdfPage: PDFPage?
 
-struct SelectionRange: Equatable, CustomStringConvertible {
-    var description: String {
-        "(start: \(startIndex), end: \(endIndex))"
-    }
-    var length:      Int {
-        endIndex - startIndex
-    }
-
-    var startIndex: Int
-    var endIndex:   Int
-
-    func expandRange(_ newStartIndex: Int, newEndIndex: Int) -> SelectionRange? {
-        if newStartIndex >= endIndex {
-            return SelectionRange(startIndex: startIndex, endIndex: newEndIndex)
-        }
-        if newEndIndex <= startIndex {
-            return SelectionRange(startIndex: newStartIndex, endIndex: endIndex)
-        }
-        return nil
-    }
-
-    static func ==(lhs: SelectionRange, rhs: SelectionRange) -> Bool {
-        lhs.startIndex == rhs.startIndex && lhs.endIndex == rhs.endIndex
+    func draw(_ layer: CALayer, in ctx: CGContext) {
+        ctx.saveGState()
+        pdfPage?.drawPage(inContext: ctx, fillColor: UIColor.white.cgColor)
+        ctx.restoreGState()
     }
 }
 
 class PDFPageView: UICollectionViewCell {
     private var pdfPage: PDFPage?
+    private let backgroundLayer        = CALayer()
+    private let pdfPageLayer           = PDFPageTileLayer()
     private let annotationLayer        = CALayer()
     private var currentAnnotationLayer = CAShapeLayer()
     private var currentHighlightLayer  = CAShapeLayer()
+    private var pdfPageLayerDelegate   = LayerDelegate()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
+        layer.addSublayer(backgroundLayer)
+        layer.addSublayer(pdfPageLayer)
         layer.addSublayer(annotationLayer)
+        pdfPageLayer.delegate = pdfPageLayerDelegate
     }
 
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
 
-    override class var layerClass: AnyClass {
-        PDFTiledLayer.self
-    }
-
     func set(page: PDFPage?) {
         pdfPage = page
+        backgroundLayer.frame = bounds
+        annotationLayer.frame = bounds
+        pdfPageLayer.frame = bounds
+        pdfPageLayerDelegate.pdfPage = pdfPage
+
+        backgroundLayer.contents = imageOfPage()?.cgImage
+        pdfPageLayer.setNeedsDisplay()
         annotationLayer.sublayers?.removeAll()
-        setNeedsDisplay()
     }
 
     func drawAnnotation(_ stroke: Stroke) {
@@ -98,7 +88,7 @@ class PDFPageView: UICollectionViewCell {
                 currentHighlightLayer.backgroundColor = UIColor.yellow.withAlphaComponent(0.5).cgColor
                 annotationLayer.addSublayer(currentHighlightLayer)
             }
-        }else if stroke.state == .changed {
+        } else if stroke.state == .changed {
             if currentHighlightLayer.superlayer == annotationLayer {
                 guard let index1 = pdfPage!.charIndex(at: stroke.points.first!.location) else { return }
                 guard let index2 = pdfPage!.charIndex(at: stroke.points.last!.location) else { return }
@@ -117,17 +107,6 @@ class PDFPageView: UICollectionViewCell {
         }
     }
 
-
-    override func draw(_ rect: CGRect) {
-        super.draw(rect)
-    }
-
-    override func draw(_ layer: CALayer, in ctx: CGContext) {
-        ctx.saveGState()
-        pdfPage?.drawPage(inContext: ctx, fillColor: UIColor.white.cgColor)
-        ctx.restoreGState()
-    }
-
     private func generatePathFromPoints(points: [StrokePoint]) -> UIBezierPath {
         let path = UIBezierPath()
         path.lineWidth = 1
@@ -141,5 +120,20 @@ class PDFPageView: UICollectionViewCell {
             }
         }
         return path
+    }
+
+    private func imageOfPage() -> UIImage? {
+        UIGraphicsBeginImageContextWithOptions(pdfPage!.pageSize, true, 1)
+        guard let context = UIGraphicsGetCurrentContext() else { return nil }
+
+        context.saveGState()
+
+        pdfPage!.drawPage(inContext: context, fillColor: UIColor.white.cgColor)
+
+        context.restoreGState()
+
+        defer { UIGraphicsEndImageContext() }
+        guard let image = UIGraphicsGetImageFromCurrentImageContext() else { return nil }
+        return image
     }
 }

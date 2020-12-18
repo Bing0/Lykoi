@@ -37,6 +37,10 @@ class PDFPage: NSObject {
         return _pageSize!
     }
 
+    var rotationAngle: Int {
+        Int(cgPage.rotationAngle)
+    }
+
     private var charCount: Int {
         if _charCount == nil {
             _charCount = Int(FPDFText_CountChars(fpTextPage))
@@ -47,9 +51,25 @@ class PDFPage: NSObject {
     func drawPage(inContext ctx: CGContext, fillColor color: CGColor) {
         ctx.setFillColor(color)
         ctx.fill(ctx.boundingBoxOfClipPath)
-        ctx.translateBy(x: 0, y: pageSize.height)
-        // TODO:  check iOS or macOS
+
+        let rotationAngle: CGFloat
+        switch cgPage.rotationAngle {
+            case 90:
+                rotationAngle = 270
+                ctx.translateBy(x: pageSize.width, y: pageSize.height)
+            case 180:
+                rotationAngle = 180
+                ctx.translateBy(x: 0, y: pageSize.height)
+            case 270:
+                rotationAngle = 90
+                ctx.translateBy(x: pageSize.width, y: pageSize.height)
+            default:
+                rotationAngle = 0
+                ctx.translateBy(x: 0, y: pageSize.height)
+        }
+
         ctx.scaleBy(x: 1.0, y: -1.0)
+        ctx.rotate(by: rotationAngle.degreesToRadians)
         ctx.concatenate(cgPage.getDrawingTransform(.cropBox,
                                                    rect: CGRect(origin: .zero, size: pageSize),
                                                    rotate: 0,
@@ -218,7 +238,7 @@ class PDFPage: NSObject {
 }
 
 
-extension String {
+private extension String {
     func tokenize() -> [String] {
         let inputRange       = CFRangeMake(0, CFStringGetLength(self as CFString))
         let flag             = UInt(kCFStringTokenizerUnitWordBoundary)
@@ -243,4 +263,9 @@ extension String {
         let substring = (self as NSString).substring(with: nsRange)
         return substring
     }
+}
+
+private extension FloatingPoint {
+    var degreesToRadians: Self { return self * .pi / 180 }
+    var radiansToDegrees: Self { return self * 180 / .pi }
 }
